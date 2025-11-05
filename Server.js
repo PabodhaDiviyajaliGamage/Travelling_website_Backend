@@ -11,10 +11,6 @@ import csrf from 'csurf';
 
 // Import routes
 import router from './router/PackageRoute.js';
-import connectDB from './config/mongodb.js';
-import session from 'express-session';
-import MongoStore from 'connect-mongo';
-import csrf from 'csurf';
 import includerouter from './router/includeRouter.js';
 import trendrouter from './router/trendingRouter.js';
 import loginrouter from './controller/logincontroller.js';
