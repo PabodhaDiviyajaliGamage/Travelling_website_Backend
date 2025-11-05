@@ -5,8 +5,9 @@
   "main": "Server.js",
   "scripts": {
     "start": "node server.js",
+    "build": "npm install",
     "dev": "nodemon server.js",
-    "prod": "set NODE_ENV=production&& node server.js",
+    "prod": "NODE_ENV=production node server.js",
     "server": "nodemon server.js"
   },
   "author": "",

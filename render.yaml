@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: backend
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    nodeVersion: 18.17.1
+    envVars:
+      - key: NODE_ENV
+        value: production
