@@ -10,13 +10,8 @@ import MongoStore from 'connect-mongo';
 import csrf from 'csurf';
 
 // Import routes
-import router from './router/PackageRoute.js';
-import includerouter from './router/includeRouter.js';
 import trendrouter from './router/trendingRouter.js';
 import loginrouter from './controller/logincontroller.js';
-import gallryRouter from './router/GalleryRouter.js';
-import paymentRoutes from './router/PaymentRouter.js';
-import afterPaymenRoutes from './router/afterPaymentRouter.js';
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -173,11 +168,8 @@ paymentApp.post('/logout', (req, res) => {
 // Mount payment routes
 app.use('/api/payments', paymentApp);
 app.use('/api/after-payments', paymentApp);
-app.use('/api/package', router);
-app.use('/api/include', includerouter);
 app.use('/api/trending', trendrouter);
 app.use('/api/admin', loginrouter);
-app.use('/api/gallery', gallryRouter);
 
 // -------------------- 5. ROOT & SERVER START --------------------
 
