@@ -9,6 +9,9 @@ import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import csrf from 'csurf';
 
+// Import database connection
+import connectDB from './config/mongodb.js';
+
 // Import routes
 import trendrouter from './router/trendingRouter.js';
 import loginrouter from './controller/logincontroller.js';
@@ -28,12 +31,24 @@ app.use(limiter);
 app.use(helmet());
 
 // -------------------- CONNECT DB --------------------
-connectDB();
+try {
+  await connectDB();
+  console.log('MongoDB connection initialized');
+} catch (error) {
+  console.error('Failed to connect to MongoDB:', error);
+  // Continue with the application, session store will handle its own connection
+}
 
 const mongoUri = process.env.MONGO_URL;
+if (!mongoUri) {
+  console.error('MONGO_URL environment variable is not defined');
+  process.exit(1);
+}
+
 const sessionStore = MongoStore.create({
   mongoUrl: mongoUri,
   collectionName: 'sessions',
+  ttl: 24 * 60 * 60 // 1 day
 });
 
 sessionStore.on('error', (error) => console.error('MongoStore error:', error));
